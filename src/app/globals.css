@@ -1,26 +1,147 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+:root {
+  --background: #F5F5F7;
+  /* Apple Light Gray */
+  --foreground: #1D1D1F;
+  /* Apple Dark Gray */
+
+  --card: rgba(255, 255, 255, 0.7);
+  --card-foreground: #1D1D1F;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #1D1D1F;
+
+  --primary: #007AFF;
+  /* Apple Blue */
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #E5E5EA;
+  /* Apple System Gray 5 */
+  --secondary-foreground: #1D1D1F;
+
+  --muted: #F2F2F7;
+  /* Apple System Gray 6 */
+  --muted-foreground: #86868B;
+  /* Apple Gray Text */
+
+  --accent: rgba(0, 122, 255, 0.1);
+  --accent-foreground: #007AFF;
+
+  --destructive: #FF3B30;
+  /* Apple Red */
+  --destructive-foreground: #FFFFFF;
+
+  --border: #D1D1D6;
+  /* Apple System Gray 4 */
+  --input: #E5E5EA;
+  --ring: #007AFF;
+
+  --radius: 1rem;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #F5F5F7;
+
+    --card: rgba(28, 28, 30, 0.7);
+    --card-foreground: #F5F5F7;
+
+    --popover: #1C1C1E;
+    --popover-foreground: #F5F5F7;
+
+    --primary: #0A84FF;
+    /* Apple Dark Mode Blue */
+    --primary-foreground: #FFFFFF;
+
+    --secondary: #2C2C2E;
+    /* Apple System Gray 5 Dark */
+    --secondary-foreground: #F5F5F7;
+
+    --muted: #1C1C1E;
+    /* Apple System Gray 6 Dark */
+    --muted-foreground: #98989D;
+
+    --accent: rgba(10, 132, 255, 0.15);
+    --accent-foreground: #0A84FF;
+
+    --destructive: #FF453A;
+    /* Apple Dark Mode Red */
+    --destructive-foreground: #FFFFFF;
+
+    --border: #3A3A3C;
+    --input: #2C2C2E;
+    --ring: #0A84FF;
   }
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism Utilities */
+@utility glass {
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: auto;
+}
+
+.dark .glass {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@utility glass-card {
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  @apply rounded-2xl shadow-sm;
+}
+
+.dark .glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hide scrollbar for clean UI */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

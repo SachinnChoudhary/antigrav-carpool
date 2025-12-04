@@ -1,0 +1,35 @@
+model SavedSearch {
+  id          String   @id @default(uuid())
+  userId      String
+  name        String
+  from        String
+  to          String
+  flexibleDates Boolean @default(false)
+  maxPrice    Float?
+  minSeats    Int?
+  amenities   String?  @db.Text
+  alertEnabled Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation("UserSavedSearches", fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("saved_searches")
+}
+
+model PopularRoute {
+  id          String   @id @default(uuid())
+  from        String
+  to          String
+  fromLat     Float
+  fromLng     Float
+  toLat       Float
+  toLng       Float
+  searchCount Int      @default(1)
+  rideCount   Int      @default(0)
+  lastSearched DateTime @default(now())
+  
+  @@unique([from, to])
+  @@index([searchCount])
+  @@map("popular_routes")
+}
